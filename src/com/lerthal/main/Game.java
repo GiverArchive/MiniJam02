@@ -127,7 +127,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			}
 
 			if (enemies.size() == 0) {
-				// Avançar de Lvl
+				// Avanï¿½ar de Lvl
 				CUR_LEVEL++;
 				if (CUR_LEVEL > MAX_LEVEL) {
 					gameState = "Victory";
@@ -181,7 +181,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		// g.drawImage(player[curAnimation] , 20 , 20 , null);
 
-		/* Renderização do jogo */
+		/* Renderizaï¿½ï¿½o do jogo */
 		world.render(g);
 		Collections.sort(entities, Entity.nodeSorter);
 		for (int i = 0; i < entities.size(); i++) {
@@ -204,10 +204,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			g2.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 			g2.setFont(new Font("arial", Font.BOLD, 40));
 			g2.setColor(Color.white);
-			g2.drawString("Você morreu!", 380, 300);
+			g2.drawString("VocÃª morreu!", 380, 300);
 			g2.setFont(new Font("arial", Font.BOLD, 40));
 			if (showMessageGameOver) {
-				g2.drawString(">Aperte o botão X para reiniciar<", 200, 345);
+				g2.drawString(">Aperte o botï¿½o X para reiniciar<", 200, 345);
 			}
 		} else if (gameState == "Menu" && gameState == "Pause") {
 			menu.render(g);
@@ -219,7 +219,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			g2.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 			g2.setFont(new Font("arial", Font.BOLD, 30));
 			g2.setColor(Color.white);
-			g2.drawString("Parabéns, você venceu! :) ", 300, 300);
+			g2.drawString("Parabï¿½ns, vocï¿½ venceu! :) ", 300, 300);
 			g2.setFont(new Font("arial", Font.BOLD, 25));
 			if (showMessageVictory) {
 				g2.drawString("> Aperte M para sair do jogo! :) <", 240, 345);
@@ -233,27 +233,27 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			g.drawImage(Menu.instrucoes , 0 , 0 , WIDTH*SCALE , HEIGHT*SCALE ,null);
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("arial" , Font.BOLD , 13));
-			g.drawString("Movimentação" , 50 , 150);
+			g.drawString("Movimentaï¿½ï¿½o" , 50 , 150);
 			g.drawString("Tiro", 205,151 );
 			g.drawString("W" , 90 , 100);
 			g.drawString("S" , 92 , 120);
 			g.drawString("A" , 70 , 120);
 			g.drawString("D" , 112 , 120);
 			g.setFont(new Font("arial" , Font.ITALIC , 18));
-			g.drawString("Pegue o cajado e derrote todos os inimigos para avançar de nível;" , 38 , 276);
+			g.drawString("Pegue o cajado e derrote todos os inimigos para avanï¿½ar de nï¿½vel;" , 38 , 276);
 			g.setFont(new Font("arial" , Font.ITALIC , 16));
 			g.drawString("Cajado lvl1 (arma principal)" , 65 , 440 );
 			g.drawString("Cajado lvl2 (causa mais dano)" , 65 , 520 );
 			g.drawString("Cajado lvl3 (tiro duplo)" , 65 , 600 );
-			g.drawString("Poção de Energia" , 330 , 430);
+			g.drawString("Poï¿½ï¿½o de Energia" , 330 , 430);
 			g.drawString("(+Speed)" , 360 , 450);
-			g.drawString("Poção de Vida" , 335 , 585);
+			g.drawString("Poï¿½ï¿½o de Vida" , 335 , 585);
 			g.drawString("Icone de Speed" , 565 , 435);
-			g.drawString("Icone de evolução" , 565 , 580);
+			g.drawString("Icone de evoluï¿½ï¿½o" , 565 , 580);
 			g.drawString("do cajado" , 580 , 600);
-			g.drawString("Essência Azul" , 800 , 425);
-			g.drawString("(Munição)" , 810 , 450);
-			g.drawString("Icone de Essência" , 810 , 590);
+			g.drawString("Essï¿½ncia Azul" , 800 , 425);
+			g.drawString("(Muniï¿½ï¿½o)" , 810 , 450);
+			g.drawString("Icone de Essï¿½ncia" , 810 , 590);
 			g.drawString("Aperte I para iniciar" , 800 , 15);
 
 		}
