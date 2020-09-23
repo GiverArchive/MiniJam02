@@ -36,15 +36,6 @@ public class Particle extends Entity{
 	public void render(Graphics g){
 		g.setColor(new Color(91 , 111 , 226));
 		g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, width, height);
-		
-		if(Player.wisdomPoints >= 5) {
-			g.setColor(Color.YELLOW);
-			g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, width, height);
-		}
-		if(Player.wisdomPoints >= 10) {
-			g.setColor(new Color(0, 255 , 136));
-			g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, width, height);
-		}
 	}
 	
 }

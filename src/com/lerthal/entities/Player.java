@@ -1,15 +1,10 @@
 package com.lerthal.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.TimerTask;
 
-import com.lerthal.graficos.Spritesheet;
 import com.lerthal.main.Game;
 import com.lerthal.main.Sound;
-import com.lerthal.main.TimerUtils;
 import com.lerthal.world.Camera;
 import com.lerthal.world.World;
 
@@ -20,13 +15,10 @@ public class Player extends Entity {
 	public int dir = right_dir;
 	public double speed = 1.8;
 	public int ammo = 0;
-	public static int wisdomPoints = 0;
 	private int frames = 0, maxFrames = 5, index = 0, maxIndex = 7;
 	private boolean moved = false;
 	public static final int WIDTH = 16;
 	public static final int HEIGHT = 16;
-	private int levelLimit = 5;
-	private int level = 1;
 
 	private BufferedImage[] rightPlayer;
 	private BufferedImage[] downPlayer;
@@ -35,7 +27,7 @@ public class Player extends Entity {
 
 	private BufferedImage playerDamageLeft, playerDamageRight, playerDamageUp, playerDamageDown;
 
-	public double life = 100, maxLife = 100;
+	public double life = 5, maxLife = 6;
 	public int mx, my;
 
 	public boolean isDamaged = false;
@@ -108,10 +100,10 @@ public class Player extends Entity {
 			index = 0;
 		}
 
-		checkCollisionWithEnergy();
-		checkCollisionWithLife();
-		checkCollisionWithAmmo();
+		checkCollisionWithLifeBox();
+		checkCollisionWithAmmoBox();
 		checkCollisionWithGun();
+		checkCollisionWithHelmet();
 
 		if (isDamaged) {
 			this.damageFrames++;
@@ -206,22 +198,17 @@ public class Player extends Entity {
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH / 2), 0, World.WIDTH * 16 - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT / 2), 0, World.HEIGHT * 16 - Game.HEIGHT);
 
-		if (wisdomPoints >= levelLimit) {
-			Sound.powerUp.play();
-			level++;
-			levelLimit += 5;
-		}
 
 	}
 
-	public void checkCollisionWithLife() {
+	public void checkCollisionWithLifeBox() {
 		for (int i = 0; i < Game.entities.size(); i++) {
 			Entity atual = Game.entities.get(i);
-			if (atual instanceof LifePotion) {
+			if (atual instanceof LifeBox) {
 				if (Entity.isColliding(this, atual)) {
-					life += 10;
-					if (life >= 100) {
-						life = 100;
+					life += 1;
+					if (life >= 5) {
+						life = 5;
 						continue;
 					}
 					Game.entities.remove(atual);
@@ -231,30 +218,29 @@ public class Player extends Entity {
 
 	}
 
-	public void checkCollisionWithEnergy() {
+	public void checkCollisionWithHelmet() {
 		for (int i = 0; i < Game.entities.size(); i++) {
 			Entity atual = Game.entities.get(i);
-			if (atual instanceof EnergyPotion) {
+			if (atual instanceof Helmet) {
 				if (Entity.isColliding(this, atual)) {
-					speed += 0.5;
-					if (speed > 2.3) {
-						speed = 2.3;
-						Game.player.setMask(2, 2, 11, 14);
+					maxLife = 6;
+					if (life >= 6) {
+						life = 6;
 						continue;
 					}
 					Game.entities.remove(atual);
-
 				}
 			}
 		}
+
 	}
 
-	public void checkCollisionWithAmmo() {
+	public void checkCollisionWithAmmoBox() {
 		for (int i = 0; i < Game.entities.size(); i++) {
 			Entity atual = Game.entities.get(i);
-			if (atual instanceof Ammo) {
+			if (atual instanceof AmmoBox) {
 				if (Entity.isColliding(this, atual)) {
-					ammo += 100;
+					ammo += 5;
 					Game.entities.remove(atual);
 				}
 			}
@@ -282,55 +268,22 @@ public class Player extends Entity {
 				g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 				if (Gun) {
 					// drawImage RIGHT
-					g.drawImage(Entity.gunRight, this.getX() + 2 - Camera.x, this.getY() - Camera.y, null);
 				}
-				if (Gun && wisdomPoints >= 5) {
-					// drawImage RightYellow
-					g.drawImage(Entity.gunRightYellow, this.getX() + 2 - Camera.x, this.getY() - Camera.y, null);
-				}
-				if (Gun && wisdomPoints >= 10) {
-					g.drawImage(Entity.gunRightGreen, this.getX() + 2 - Camera.x, this.getY() - Camera.y, null);
-				}
-
 			} else if (dir == left_dir) {
 				g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 				if (Gun) {
 					// DrawImage LEFT
-					g.drawImage(Entity.gunLeft, this.getX() - 2 - Camera.x, this.getY() - Camera.y, null);
 				}
-				if (Gun && wisdomPoints >= 5) {
-					// drawImage leftYellow
-					g.drawImage(Entity.gunLeftYellow, this.getX() - 2 - Camera.x, this.getY() - Camera.y, null);
-				}
-				if (Gun && wisdomPoints >= 10) {
-					g.drawImage(Entity.gunLeftGreen, this.getX() - 2 - Camera.x, this.getY() - Camera.y, null);
-				}
-
 			} else if (dir == up_dir) {
 				g.drawImage(upPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 				if (Gun) {
-					g.drawImage(Entity.gunUp, this.getX() - 2 - Camera.x, this.getY() + 1 - Camera.y, null);
-				}
-				if (Gun && wisdomPoints >= 5) {
-					// drawImage upYellow
-					g.drawImage(Entity.gunUpYellow, this.getX() - 2 - Camera.x, this.getY() + 1 - Camera.y, null);
-				}
-				if (Gun && wisdomPoints >= 10) {
-					g.drawImage(Entity.gunUpGreen, this.getX() - 2 - Camera.x, this.getY() + 1 - Camera.y, null);
-				}
 
+				}
 			} else if (dir == down_dir) {
 				g.drawImage(downPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 				if (Gun) {
-					g.drawImage(gunDown, this.getX() - Camera.x, this.getY() - Camera.y, null);
 				}
-				if (Gun && wisdomPoints >= 5) {
-					// drawImage downYellow
-					g.drawImage(Entity.gunDownYellow, this.getX() - Camera.x, this.getY() - Camera.y, null);
-				}
-				if (Gun && wisdomPoints >= 10) {
-					g.drawImage(Entity.gunDownGreen, this.getX() - Camera.x, this.getY() - Camera.y, null);
-				}
+
 			}
 			// Feedback do ataque
 		} else if (isDamaged = true && dir == right_dir) {
@@ -342,16 +295,6 @@ public class Player extends Entity {
 		} else if (isDamaged = true && dir == down_dir) {
 			g.drawImage(playerDamageDown, this.getX() - Camera.x, this.getY() - Camera.y, null);
 		}
-
-		if (speed >= 1.9) {
-			g.drawImage(Entity.speedIcon, 1, 13, null);
-		}
-
-		if (wisdomPoints >= 5) {
-			g.drawImage(Entity.wisdomIcon, 17, 13, null);
-		}
-
-		//g.drawString("" + wisdomPoints, 20, 20);
 
 		/* MASK */
 		// g.setColor(Color.red);

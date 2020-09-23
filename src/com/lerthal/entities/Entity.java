@@ -15,36 +15,10 @@ import com.lerthal.world.World;
 
 public class Entity {
 
-	public static BufferedImage LIFEPOTION_EN = Game.spritesheet.getSprite(64, 112, 16, 16);
-	public static BufferedImage ENERGYPOTION_EN = Game.spritesheet.getSprite(80, 112, 16, 16);
+	public static BufferedImage LIFEBOX_EN = Game.spritesheet.getSprite(64, 112, 16, 16);
 	public static BufferedImage WEAPON_EN = Game.spritesheet.getSprite(16, 64, 16, 16);
 	public static BufferedImage AMMO_EN = Game.spritesheet.getSprite(0, 96, 16, 16);
 	public static BufferedImage ENEMY_EN = Game.spritesheet.getSprite(96, 80, 16, 16);
-	public static BufferedImage ENEMY_DAMAGE = Game.spritesheet.getSprite(144, 64, 16, 16);
-	public static BufferedImage life_bar = Game.spritesheet.getSprite(0, 112, 16, 16);
-	public static BufferedImage life_bar2 = Game.spritesheet.getSprite(16, 112, 16, 16);
-	public static BufferedImage life_bar3 = Game.spritesheet.getSprite(32, 112, 16, 16);
-	public static BufferedImage life_bar4 = Game.spritesheet.getSprite(48, 112, 16, 16);
-	public static BufferedImage speedIcon = Game.spritesheet.getSprite(64, 80, 16, 16);
-	public static BufferedImage wisdomIcon = Game.spritesheet.getSprite(0, 128, 16, 16);
-	public static BufferedImage ammoIcon = Game.spritesheet.getSprite(80, 80, 16, 16);
-	public static BufferedImage savingIcon = Game.spritesheet.getSprite(80, 128, 16, 16);
-
-	public static BufferedImage gunRightYellow = Game.spritesheet.getSprite(16, 128, 16, 16);
-	public static BufferedImage gunLeftYellow = Game.spritesheet.getSprite(48, 128, 16, 16);
-	public static BufferedImage gunUpYellow = Game.spritesheet.getSprite(32, 128, 16, 16);
-	public static BufferedImage gunDownYellow = Game.spritesheet.getSprite(64, 128, 16, 16);
-
-	public static BufferedImage gunRightGreen = Game.spritesheet.getSprite(0, 144, 16, 16);
-	public static BufferedImage gunLeftGreen = Game.spritesheet.getSprite(32, 144, 16, 16);
-	public static BufferedImage gunUpGreen = Game.spritesheet.getSprite(16, 144, 16, 16);
-	public static BufferedImage gunDownGreen = Game.spritesheet.getSprite(48, 144, 16, 16);
-
-	public static BufferedImage gunRight = Game.spritesheet.getSprite(96, 64, 16, 16);
-	public static BufferedImage gunLeft = Game.spritesheet.getSprite(80, 64, 16, 16);
-	public static BufferedImage gunUp = Game.spritesheet.getSprite(64, 64, 16, 16);
-	public static BufferedImage gunDown = Game.spritesheet.getSprite(48, 64, 16, 16);
-	public static BufferedImage placa = Game.spritesheet.getSprite(80, 144, 16, 16);
 
 	protected double x;
 	protected double y;

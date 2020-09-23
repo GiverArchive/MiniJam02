@@ -31,18 +31,6 @@ public class UI {
 	*/
 	
 	public void render(Graphics g){
-		g.setColor(Color.red);
-		g.fillRect(14, 7, 35, 4);
-		g.setColor(Color.green);
-		g.fillRect(14, 7, (int)((Game.player.life / Game.player.maxLife)*35), 4);
-		g.setColor(Color.white);
-		//g.drawString((int)Player.life+"/"+(int)Player.maxLife,10,10);
-		
-		g.drawImage(Entity.life_bar2, 13, 1, null);
-		g.drawImage(Entity.life_bar3, 29, 1, null);
-		g.drawImage(Entity.life_bar4, 40, 1, null);
-		g.drawImage(Entity.life_bar, 0, 0, null);
-		g.drawImage(Entity.ammoIcon, 203, 2, null);
 		g.setFont((new Font("arial", Font.BOLD, 10)));
 		g.drawString("" + Game.player.ammo, 220, 14);
 		// g.drawString(""+player.speed, 10, 10);

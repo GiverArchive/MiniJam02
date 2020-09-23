@@ -29,21 +29,11 @@ public class Enemy extends Entity {
 
 		sprites = new BufferedImage[11];
 		sprites[0] = Game.spritesheet.getSprite(96, 80, 16, 16);
-		sprites[1] = Game.spritesheet.getSprite(112, 80, 16, 16);
-		sprites[2] = Game.spritesheet.getSprite(128, 80, 16, 16);
-		sprites[3] = Game.spritesheet.getSprite(144, 80, 16, 16);
-		sprites[4] = Game.spritesheet.getSprite(96, 96, 16, 16);
-		sprites[5] = Game.spritesheet.getSprite(112, 96, 16, 16);
-		sprites[6] = Game.spritesheet.getSprite(128, 96, 16, 16);
-		sprites[7] = Game.spritesheet.getSprite(144, 96, 16, 16);
-		sprites[8] = Game.spritesheet.getSprite(96, 112, 16, 16);
-		sprites[9] = Game.spritesheet.getSprite(112, 112, 16, 16);
-		sprites[10] = Game.spritesheet.getSprite(128, 112, 16, 16);
 
 	}
 
 	public void tick() {
-		maskX = 6;
+		/*maskX = 6;
 		maskY = 6;
 		if(!isCollidingWithPlayer()) {
 			if(path == null || path.size() == 0){
@@ -54,17 +44,11 @@ public class Enemy extends Entity {
 		
 		} else {
 			// Estamos colidindo
-			if (Game.rand.nextInt(100) < 10) {
+			if (Game.rand.nextInt(100) < 30) {
 				Sound.hit.play();
 				Game.player.life-=3;
-				Game.player.speed -= 0.06;
 				Game.player.isDamaged = true;
-
-				if (Game.player.speed <= 1.2) {
-					Game.player.speed = 1.2;
-				}
 				// System.out.println("Vida: "+Game.player.life);
-
 			}
 		}
 		if(new Random().nextInt(100) < 75) {
@@ -75,9 +59,7 @@ public class Enemy extends Entity {
 			Vector2i end = new Vector2i ((int)(Game.player.x/16),(int)(Game.player.y/16));
 			path = AStar.findPath(Game.world, start, end);
 		}
-		
-		
-		
+
 		frames++;
 
 		if (frames == maxFrames) {
@@ -93,8 +75,6 @@ public class Enemy extends Entity {
 
 		if (life <= 0) {
 			destroyEnemy();
-			Game.player.wisdomPoints+=1;
-			
 		}
 		
 		if(isDamaged){
@@ -104,9 +84,8 @@ public class Enemy extends Entity {
 				isDamaged = false;
 			}
 		}
-		
-		
-	
+		*/
+
 	}
 
 	public void destroyEnemy() {
@@ -114,7 +93,6 @@ public class Enemy extends Entity {
 		Game.entities.remove(this);
 		return;
 	}
-	
 
 	public void checkCollisionWithBullet() {
 		for (int i = 0; i < Game.bullets.size(); i++) {
@@ -123,9 +101,6 @@ public class Enemy extends Entity {
 				if (Entity.isColliding(this, e)) {
 					isDamaged = true;
 					life--;
-					if(Game.player.wisdomPoints >= 5){
-						life-=2;
-					}
 					Game.bullets.remove(i);
 					return;
 				}
@@ -145,7 +120,7 @@ public class Enemy extends Entity {
 		if(!isDamaged) {
 			g.drawImage(sprites[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		}else {
-			g.drawImage(Entity.ENEMY_DAMAGE, this.getX() - Camera.x, this.getY() - Camera.y, null);
+			//sprite do inimigo tomando dano;
 		}
 		// super.render(g);
 		 //g.fillRect(this.getX() + maskX - Camera.x,this.getY() + maskY - Camera.y, 8, 8);

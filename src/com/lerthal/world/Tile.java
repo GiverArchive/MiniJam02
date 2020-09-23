@@ -8,16 +8,7 @@ import com.lerthal.main.Game;
 public class Tile {
 	
 	public static BufferedImage TILE_FLOOR = Game.spritesheet.getSprite(16, 32, 16, 16); //Chao limpo
-	public static BufferedImage TILE_FLOOR2 = Game.spritesheet.getSprite(16, 0, 16, 16); //Rachadura 1
-	public static BufferedImage TILE_FLOOR3 = Game.spritesheet.getSprite(16, 16, 16, 16); //Rachadura 2
-	public static BufferedImage TILE_FLOOR4 = Game.spritesheet.getSprite(128, 64, 16, 16); //cHAO COM FLOR
-	public static BufferedImage TILE_FLOOR5 = Game.spritesheet.getSprite(112 , 64 , 16 ,16); //Chao com coisinha
-	
-	public static BufferedImage TILE_WALL1 = Game.spritesheet.getSprite(0, 0, 16, 16); //Meio
-	public static BufferedImage TILE_WALL2 = Game.spritesheet.getSprite(0, 16, 16, 16); //Baixo
-	public static BufferedImage TILE_WALL3 = Game.spritesheet.getSprite(0, 32, 16, 16); //Esquerda
-	public static BufferedImage TILE_WALL4 = Game.spritesheet.getSprite(0, 48, 16, 16); //Direita
-	public static BufferedImage TILE_WALL5 = Game.spritesheet.getSprite(0, 64, 16, 16); //Cima
+	public static BufferedImage TILE_WALL = Game.spritesheet.getSprite(0, 0, 16, 16); //Meio
 	
 	
 	 private BufferedImage sprite;

@@ -7,14 +7,12 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.lerthal.entities.Ammo;
+import com.lerthal.entities.AmmoBox;
 import com.lerthal.entities.Enemy;
-import com.lerthal.entities.EnergyPotion;
 import com.lerthal.entities.Entity;
-import com.lerthal.entities.LifePotion;
+import com.lerthal.entities.LifeBox;
 import com.lerthal.entities.Particle;
 import com.lerthal.entities.Player;
-import com.lerthal.entities.Sign;
 import com.lerthal.entities.Weapon;
 import com.lerthal.graficos.Spritesheet;
 import com.lerthal.main.Game;
@@ -45,38 +43,9 @@ public class World {
 					if (pixelAtual == 0xFF000000) {
 						// floor liso
 						tiles[xx + (yy * map.getWidth())] = new floorTile(xx * 16, yy * 16, Tile.TILE_FLOOR);
-					} else if (pixelAtual == 0xFF7a7a7a) {
-						// floor rachadura 1
-						tiles[xx + (yy * map.getWidth())] = new floorTile(xx * 16, yy * 16, Tile.TILE_FLOOR2);
-					} else if (pixelAtual == 0xFF585858) {
-						// floor rachadura 2
-						tiles[xx + (yy * map.getWidth())] = new floorTile(xx * 16, yy * 16, Tile.TILE_FLOOR3);
-					} else if (pixelAtual == 0xFF195858) {
-						// floor com matinho
-						tiles[xx + (yy * map.getWidth())] = new floorTile(xx * 16, yy * 16, Tile.TILE_FLOOR5);
-					} else if (pixelAtual == 0xFFc9e9d8) {
-						// floor com flor
-						tiles[xx + (yy * map.getWidth())] = new floorTile(xx * 16, yy * 16, Tile.TILE_FLOOR4);
-					} else if (pixelAtual == 0xFFffffff) {
-						// wall centro
-						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL1);
-					} else if (pixelAtual == 0xFFcfb4b4) {
-						// wall direita
-						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL4);
-					} else if (pixelAtual == 0xFFb4b8cf) {
-						// wall esquerda
-						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL3);
-					} else if (pixelAtual == 0xFFb4cfb7) {
-						// wall cima
-						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL5);
-					} else if (pixelAtual == 0xFFcdcfb4) {
-						// wall baixo
-						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL2);
-					} else if (pixelAtual == 0xFF6238e4) {
-						// Placa
-						Sign sign = new Sign(xx * 16, yy * 16, 16, 16, Entity.placa);
-						Game.entities.add(sign);
-					} else if (pixelAtual == 0xFFdf7126) {
+					}else if(pixelAtual == 0xFFffffff){
+						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL);
+					}else if (pixelAtual == 0xFFdf7126) {
 						// player
 						Game.player.setMask(2, 2, 11, 14);
 						Game.player.setX(xx * 16);
@@ -92,21 +61,16 @@ public class World {
 						// Weapon
 						Game.entities.add(new Weapon(xx * 16, yy * 16, 16, 16, Entity.WEAPON_EN));
 					} else if (pixelAtual == 0xFF99e550) {
-						// LifePotion
-						LifePotion lifePotion = new LifePotion(xx * 16, yy * 16, 16, 16, Entity.LIFEPOTION_EN);
-						lifePotion.setMask(0, 0, 12, 15);
-						Game.entities.add(lifePotion);
+						// LifeBox
+						LifeBox lifeBox = new LifeBox(xx * 16, yy * 16, 16, 16, Entity.LIFEBOX_EN);
+						lifeBox.setMask(0, 0, 12, 15);
+						Game.entities.add(lifeBox);
 					} else if (pixelAtual == 0xFFdf7126) {
 						// WEAPON
 						Game.entities.add(new Weapon(xx * 16, yy * 16, 16, 16, Entity.WEAPON_EN));
-					} else if (pixelAtual == 0xFF76428a) {
-						// EnergyPotion
-						EnergyPotion energyPotion = new EnergyPotion(xx * 16, yy * 16, 16, 16, Entity.ENERGYPOTION_EN);
-						energyPotion.setMask(0, 0, 12, 15);
-						Game.entities.add(energyPotion);
 					} else if (pixelAtual == 0xFFfbf236) {
-						// Ammo
-						Game.entities.add(new Ammo(xx * 16, yy * 16, 16, 16, Entity.AMMO_EN));
+						// AmmoBox
+						Game.entities.add(new AmmoBox(xx * 16, yy * 16, 16, 16, Entity.AMMO_EN));
 					}
 				}
 			}
@@ -118,7 +82,7 @@ public class World {
 	}
 
 	public static boolean isFree(int xNext, int yNext) {
-		int x1 = xNext / TILE_SIZE; // Pegando a proxima posição e convertendo pro formato de Tile;
+		int x1 = xNext / TILE_SIZE; // Pegando a proxima posiï¿½ï¿½o e convertendo pro formato de Tile;
 		int y1 = yNext / TILE_SIZE;
 
 		int x2 = (xNext + TILE_SIZE - 1) / TILE_SIZE;
@@ -145,7 +109,7 @@ public class World {
 	
 	
 	public static boolean isFreeDynamic(int xNext, int yNext , int width , int height) {
-		int x1 = xNext / TILE_SIZE; // Pegando a proxima posição e convertendo pro formato de Tile;
+		int x1 = xNext / TILE_SIZE; // Pegando a proxima posiï¿½ï¿½o e convertendo pro formato de Tile;
 		int y1 = yNext / TILE_SIZE;
 
 		int x2 = (xNext + width - 1) / TILE_SIZE;
@@ -174,11 +138,6 @@ public class World {
 		Game.entities.add(Game.player);
 		Game.world = new World("/" + lvl);
 		Game.player.ammo = 0;
-		Game.player.wisdomPoints = 0;
-		Entity.life_bar3 = Game.spritesheet.getSprite(32, 112, 16, 16);
-		Entity.life_bar4 = Game.spritesheet.getSprite(48, 112, 16, 16);
-		Entity.speedIcon = Game.spritesheet.getSprite(64, 80, 16, 16);
-		Entity.ammoIcon = Game.spritesheet.getSprite(80, 80, 16, 16);
 		return;
 	}
 

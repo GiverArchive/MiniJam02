@@ -40,21 +40,11 @@ public class Menu {
 	public static Option guide = new Option(88*4, 119*4, 64*4, 15*4); // poe as coordenas e o tamanho
 	public static Option exit = new Option(101*4, 137*4, 38*4, 15*4); // Poe as coordenadas e o tamanho
 
-
-
 	public Menu(){
 		mouseOptions.add(start);
 		mouseOptions.add(guide);
 		mouseOptions.add(exit);
 
-		try {
-			startPlay = ImageIO.read(World.class.getResource("/startPlay.png"));
-			startGuide = ImageIO.read(World.class.getResource("/startCreditos.png"));
-			startExit = ImageIO.read(World.class.getResource("/startExit.png"));
-			instrucoes = ImageIO.read(getClass().getResource("/instrucoes.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void tick() {

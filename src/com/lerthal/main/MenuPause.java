@@ -32,13 +32,6 @@ public class MenuPause {
         mouseOptions.add(guidePause);
         mouseOptions.add(exitPause);
 
-        try {
-            pauseResume = ImageIO.read(getClass().getResource("/pauseResume.png"));
-            pauseGuide = ImageIO.read(getClass().getResource("/pauseGuide.png"));
-            pauseExit = ImageIO.read(getClass().getResource("/pauseExit.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
