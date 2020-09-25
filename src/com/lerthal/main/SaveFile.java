@@ -35,11 +35,11 @@ public class SaveFile
   
     BufferedReader reader = new BufferedReader(new FileReader(file));
     
-    data.put("player-life", reader.readLine());
-    data.put("ammo", reader.readLine());
-    data.put("level", reader.readLine());
-    data.put("lifepacks", reader.readLine());
-    data.put("helmet", reader.readLine());
+    data.put("player-life", new String(Base64.getDecoder().decode(reader.readLine())));
+    data.put("ammo", new String(Base64.getDecoder().decode(reader.readLine())));
+    data.put("level", new String(Base64.getDecoder().decode(reader.readLine())));
+    data.put("lifepacks", new String(Base64.getDecoder().decode(reader.readLine())));
+    data.put("helmet", new String(Base64.getDecoder().decode(reader.readLine())));
     
     reader.close();
   }
