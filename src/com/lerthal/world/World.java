@@ -3,7 +3,6 @@ package com.lerthal.world;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -12,9 +11,7 @@ import com.lerthal.entities.Enemy;
 import com.lerthal.entities.Entity;
 import com.lerthal.entities.LifeBox;
 import com.lerthal.entities.Particle;
-import com.lerthal.entities.Player;
 import com.lerthal.entities.Weapon;
-import com.lerthal.graficos.Spritesheet;
 import com.lerthal.main.Game;
 
 public class World {
@@ -44,7 +41,7 @@ public class World {
 						// floor liso
 						tiles[xx + (yy * map.getWidth())] = new floorTile(xx * 16, yy * 16, Tile.TILE_FLOOR);
 					}else if(pixelAtual == 0xFFffffff){
-						tiles[xx + (yy * map.getWidth())] = new wallTile(xx * 16, yy * 16, Tile.TILE_WALL);
+						tiles[xx + (yy * map.getWidth())] = new WallTile(xx * 16, yy * 16, Tile.TILE_WALL);
 					}else if (pixelAtual == 0xFFdf7126) {
 						// player
 						Game.player.setMask(2, 2, 11, 14);
@@ -94,10 +91,10 @@ public class World {
 		int x4 = (xNext + TILE_SIZE - 1) / TILE_SIZE;
 		int y4 = (yNext + TILE_SIZE - 1) / TILE_SIZE;
 
-		return !((tiles[x1 + (y1 * World.WIDTH)] instanceof wallTile)
-				|| (tiles[x2 + (y2 * World.WIDTH)] instanceof wallTile)
-				|| (tiles[x3 + (y3 * World.WIDTH)] instanceof wallTile)
-				|| (tiles[x4 + (y4 * World.WIDTH)] instanceof wallTile));
+		return !((tiles[x1 + (y1 * World.WIDTH)] instanceof WallTile)
+				|| (tiles[x2 + (y2 * World.WIDTH)] instanceof WallTile)
+				|| (tiles[x3 + (y3 * World.WIDTH)] instanceof WallTile)
+				|| (tiles[x4 + (y4 * World.WIDTH)] instanceof WallTile));
 
 	}
 	
@@ -121,24 +118,18 @@ public class World {
 		int x4 = (xNext + width - 1) /  TILE_SIZE;
 		int y4 = (yNext + height - 1) / TILE_SIZE;
 
-		return !((tiles[x1 + (y1 * World.WIDTH)] instanceof wallTile)
-				|| (tiles[x2 + (y2 * World.WIDTH)] instanceof wallTile)
-				|| (tiles[x3 + (y3 * World.WIDTH)] instanceof wallTile)
-				|| (tiles[x4 + (y4 * World.WIDTH)] instanceof wallTile));
+		return !((tiles[x1 + (y1 * World.WIDTH)] instanceof WallTile)
+				|| (tiles[x2 + (y2 * World.WIDTH)] instanceof WallTile)
+				|| (tiles[x3 + (y3 * World.WIDTH)] instanceof WallTile)
+				|| (tiles[x4 + (y4 * World.WIDTH)] instanceof WallTile));
 
 	}
 
 	public static void restartGame(String lvl) {
 		Game.entities.clear();
 		Game.enemies.clear();
-		Game.entities = new ArrayList<Entity>();
-		Game.enemies = new ArrayList<Enemy>();
-		Game.spritesheet = new Spritesheet("/spritesheet.png");
-		Game.player = new Player(16, 16, 16, 16, Game.spritesheet.getSprite(32, 0, 16, 16));
-		Game.entities.add(Game.player);
 		Game.world = new World("/" + lvl);
-		Game.player.ammo = 0;
-		return;
+		Game.entities.add(Game.player);
 	}
 
 	public void render(Graphics g) {
@@ -158,7 +149,5 @@ public class World {
 				tile.render(g);
 			}
 		}
-
 	}
-
 }

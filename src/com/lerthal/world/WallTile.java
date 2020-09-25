@@ -5,9 +5,9 @@ import java.awt.image.BufferedImage;
 
 import com.lerthal.entities.Entity;
 
-public class wallTile extends Tile{
+public class WallTile extends Tile{
 
-	public wallTile(int x, int y, BufferedImage sprite) {
+	public WallTile(int x, int y, BufferedImage sprite) {
 		super(x, y, sprite);
 		
 	}

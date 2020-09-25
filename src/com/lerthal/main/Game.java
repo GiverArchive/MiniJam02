@@ -1,21 +1,5 @@
 package com.lerthal.main;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.*;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import javax.swing.JFrame;
-
 import com.lerthal.entities.Enemy;
 import com.lerthal.entities.Entity;
 import com.lerthal.entities.Player;
@@ -24,8 +8,18 @@ import com.lerthal.graficos.Spritesheet;
 import com.lerthal.graficos.UI;
 import com.lerthal.world.World;
 
-public class Game extends Canvas implements Runnable, KeyListener, MouseListener , MouseMotionListener {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
+public class Game extends Canvas implements Runnable{
+	
+	public static Game game;
 	public static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
@@ -37,9 +31,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private boolean showMessageGameOver = true;
 	private boolean showMessageVictory = true;
 	private int framesGameOver = 0;
-	private boolean restartGame = false;
-	// public static boolean saveGame = false;
-	// public static boolean showSaveIcon = true;
+	public static boolean restartGame = false;
 
 	private BufferedImage image;
 
@@ -62,8 +54,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static World world;
 	public static Random rand;
 	public UI ui;
-
-
+	
 	public Menu menu;
 	public MenuPause menuPause;
 
@@ -71,9 +62,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		Sound.musicBackground.loop();
 		Sound.musicBackground.setVolume(-39);
 		rand = new Random();
-		addKeyListener(this);
-		addMouseListener(this);
-		addMouseMotionListener(this);
 		this.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		initFrame();
 		/*
@@ -94,13 +82,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		world = new World("/lvl1.png");
 		menu = new Menu();
 		menuPause = new MenuPause();
-		// sign = new Sign(120, 470, 16, 16, spritesheet.getSprite(4, 144, 16, 16));
-		// entities.add(sign);
+		new Listeners(this);
 
 	}
-
+	
 	public static void main(String[] args) {
-		Game game = new Game();
+		game = new Game();
 		game.start();
 	}
 
@@ -163,7 +150,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		}
 
 	}
-
+	
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
@@ -204,8 +191,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			if (showMessageGameOver) {
 				g2.drawString(">Aperte o bot�o X para reiniciar<", 200, 345);
 			}
-		} else if (gameState == "Menu" && gameState == "Pause") {
-			menu.render(g);
 		}
 
 		if (gameState == "Victory") {
@@ -300,132 +285,5 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		}
 
 		stop();
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_M && enemies.size() == 0) {
-			System.exit(0);
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-			player.right = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-			player.left = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
-			player.up = true;
-
-			if (gameState == "Menu") {
-				menu.up = true;
-			}else if(gameState == "Pause"){
-				menuPause.up = true;
-			}
-
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
-			player.down = true;
-
-			if (gameState == "Menu") {
-				menu.down = true;
-			}else if(gameState == "Pause"){
-				menuPause.down = true;
-			}
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (gameState == "Menu") {
-				menu.enter = true;
-			}else if(gameState == "Pause"){
-				menuPause.enter = true;
-			}
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_X) {
-			restartGame = true;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-			gameState = "Pause";
-		}
-
-		if (gameState == "Guide" && e.getKeyCode() == KeyEvent.VK_I ){
-			gameState = "Normal";
-		}
-
-		// Atirar com teclado
-		/*
-		 * if (e.getKeyCode() == KeyEvent.VK_F) { player.isShooting = true; }
-		 */
-
-	}
-
-	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-			player.right = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-			player.left = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
-			player.up = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
-			player.down = false;
-		}
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		player.mouseShoot = true;
-		player.mx = (e.getX() / 4);
-		player.my = (e.getY() / 4);
-
-		Menu.mousePressed = true;
-		MenuPause.mousePressed = true;
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		Menu.mouseX = e.getX();
-		Menu.mouseY = e.getY();
-
-		MenuPause.mouseX = e.getX();
-		MenuPause.mouseY = e.getY();
 	}
 }

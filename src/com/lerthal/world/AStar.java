@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.lerthal.entities.Entity;
-
 public class AStar {
 
 	public static double lastTime = System.currentTimeMillis();
@@ -64,12 +62,12 @@ public class AStar {
 				Tile tile = World.tiles[x + xi + ((y + yi) * World.WIDTH)];
 				if (tile == null)
 					continue;
-				if (tile instanceof wallTile)
+				if (tile instanceof WallTile)
 					continue;
 				if (i == 0) {
 					Tile test = World.tiles[x + xi + 1 + ((y + yi) * World.WIDTH)];
 					Tile test2 = World.tiles[x + xi + ((y + yi + 1) * World.WIDTH)];
-					if (test instanceof wallTile || test2 instanceof wallTile) {
+					if (test instanceof WallTile || test2 instanceof WallTile) {
 						continue;
 					}
 				}
@@ -77,7 +75,7 @@ public class AStar {
 				else if (i == 2) {
 					Tile test = World.tiles[x + xi + 1 + ((y + yi) * World.WIDTH)];
 					Tile test2 = World.tiles[x + xi + ((y + yi + 1) * World.WIDTH)];
-					if (test instanceof wallTile || test2 instanceof wallTile) {
+					if (test instanceof WallTile || test2 instanceof WallTile) {
 						continue;
 					}
 				}
@@ -85,7 +83,7 @@ public class AStar {
 				else if (i == 6) {
 					Tile test = World.tiles[x + xi + ((y + yi - 1) * World.WIDTH)];
 					Tile test2 = World.tiles[x + xi + 1 + ((y + yi) * World.WIDTH)];
-					if (test instanceof wallTile || test2 instanceof wallTile) {
+					if (test instanceof WallTile || test2 instanceof WallTile) {
 						continue;
 					}
 				}
@@ -93,7 +91,7 @@ public class AStar {
 				else if (i == 8) {
 					Tile test = World.tiles[x + xi + ((y + yi - 1) * World.WIDTH)];
 					Tile test2 = World.tiles[x + xi - 1 + ((y + yi) * World.WIDTH)];
-					if (test instanceof wallTile || test2 instanceof wallTile) {
+					if (test instanceof WallTile || test2 instanceof WallTile) {
 						continue;
 					}
 				}

@@ -6,9 +6,7 @@ import java.awt.image.BufferedImage;
 
 import com.lerthal.main.Game;
 import com.lerthal.world.Camera;
-import com.lerthal.world.Tile;
 import com.lerthal.world.World;
-import com.lerthal.world.wallTile;
 
 public class Shoot extends Entity {
 

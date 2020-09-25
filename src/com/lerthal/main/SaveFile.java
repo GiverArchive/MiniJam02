@@ -1,19 +1,72 @@
 package com.lerthal.main;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Base64;
 import java.util.HashMap;
 
 public class SaveFile
 {
   private static HashMap<String, String> data = new HashMap<>();
   
-  static public void loadFile()
+  private static void putDefaults()
   {
-    // TODO
+    data.put("player-life", "5");
+    data.put("ammo", "0");
+    data.put("level", "1");
+    data.put("lifepacks", "0");
+    data.put("helmet", "naoequiped");
   }
   
-  public static void saveFile()
+  static public void loadFile() throws Throwable
   {
-    // TODO
+    putDefaults();
+    
+    File folder = new File(System.getProperty("user.home"), "Gamezinho");
+    
+    if(!folder.exists()) return;
+    
+    File file = new File(folder, "Save.dat");
+    
+    if(!file.exists()) return;
+  
+    BufferedReader reader = new BufferedReader(new FileReader(file));
+    
+    data.put("player-life", reader.readLine());
+    data.put("ammo", reader.readLine());
+    data.put("level", reader.readLine());
+    data.put("lifepacks", reader.readLine());
+    data.put("helmet", reader.readLine());
+    
+    reader.close();
+  }
+  
+  public static void saveFile() throws Throwable
+  {
+    File folder = new File(System.getProperty("user.home", "Gamezinho"));
+    
+    if(!folder.exists()) folder.mkdir();
+    
+    File file = new File(folder, "Save.dat");
+    
+    if(file.exists()) file.delete();
+  
+    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+    
+    writer.write(new String(Base64.getEncoder().encode(data.get("player-life").getBytes())));
+    writer.newLine();
+    writer.write(new String(Base64.getEncoder().encode(data.get("ammo").getBytes())));
+    writer.newLine();
+    writer.write(new String(Base64.getEncoder().encode(data.get("level").getBytes())));
+    writer.newLine();
+    writer.write(new String(Base64.getEncoder().encode(data.get("lifepacks").getBytes())));
+    writer.newLine();
+    writer.write(new String(Base64.getEncoder().encode(data.get("helmet").getBytes())));
+    writer.flush();
+    writer.close();
   }
   
   public static int getPlayerLife()
@@ -64,5 +117,9 @@ public class SaveFile
   public static void setLifePacks(int lifePacks)
   {
     data.put("lifepacks", String.valueOf(lifePacks));
+  }
+  
+  static{
+    putDefaults();
   }
 }
