@@ -7,15 +7,19 @@ import com.lerthal.entities.Shoot;
 import com.lerthal.graficos.Spritesheet;
 import com.lerthal.graficos.UI;
 import com.lerthal.world.World;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable
 {
@@ -237,35 +241,7 @@ public class Game extends Canvas implements Runnable
     {
       menuPause.render(g);
     }
-    if(gameState == "Guide")
-    {
-      g.drawImage(Menu.instrucoes, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
-      g.setColor(Color.WHITE);
-      g.setFont(new Font("arial", Font.BOLD, 13));
-      g.drawString("Movimenta��o", 50, 150);
-      g.drawString("Tiro", 205, 151);
-      g.drawString("W", 90, 100);
-      g.drawString("S", 92, 120);
-      g.drawString("A", 70, 120);
-      g.drawString("D", 112, 120);
-      g.setFont(new Font("arial", Font.ITALIC, 18));
-      g.drawString("Pegue o cajado e derrote todos os inimigos para avan�ar de n�vel;", 38, 276);
-      g.setFont(new Font("arial", Font.ITALIC, 16));
-      g.drawString("Cajado lvl1 (arma principal)", 65, 440);
-      g.drawString("Cajado lvl2 (causa mais dano)", 65, 520);
-      g.drawString("Cajado lvl3 (tiro duplo)", 65, 600);
-      g.drawString("Po��o de Energia", 330, 430);
-      g.drawString("(+Speed)", 360, 450);
-      g.drawString("Po��o de Vida", 335, 585);
-      g.drawString("Icone de Speed", 565, 435);
-      g.drawString("Icone de evolu��o", 565, 580);
-      g.drawString("do cajado", 580, 600);
-      g.drawString("Ess�ncia Azul", 800, 425);
-      g.drawString("(Muni��o)", 810, 450);
-      g.drawString("Icone de Ess�ncia", 810, 590);
-      g.drawString("Aperte I para iniciar", 800, 15);
-      
-    }
+    
     bs.show();
     
   }
