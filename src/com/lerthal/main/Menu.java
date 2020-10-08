@@ -2,12 +2,13 @@ package com.lerthal.main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 public class Menu
 {
-  
   public String[] options = {"New Game", "Instructions", "Exit"};
   public int currentOption = 0;
   public int maxOption = options.length - 1;
@@ -23,6 +24,31 @@ public class Menu
   public static Option start = new Option(96 * 4, 100 * 4, 48 * 4, 15 * 4); // poe as coordenas e o tamanho
   public static Option guide = new Option(88 * 4, 119 * 4, 64 * 4, 15 * 4); // poe as coordenas e o tamanho
   public static Option exit = new Option(101 * 4, 137 * 4, 38 * 4, 15 * 4); // Poe as coordenadas e o tamanho
+  
+  public static BufferedImage menu_menu, b_resume, b_exit, b_new, b_cred;
+  public static BufferedImage s_resume, s_exit, s_new, s_cred;
+  
+  static{
+    
+    String path = "/menus/iniciar/";
+    
+    try
+    {
+      menu_menu = ImageIO.read(Menu.class.getResource(path + "menu"));
+      b_new = ImageIO.read(Menu.class.getResource(path + "b_new"));
+      b_resume = ImageIO.read(Menu.class.getResource(path + "b_resume"));
+      b_exit = ImageIO.read(Menu.class.getResource(path + "b_exit"));
+      b_cred = ImageIO.read(Menu.class.getResource(path + "b_cred"));
+      s_new = ImageIO.read(Menu.class.getResource(path + "s_new"));
+      s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume"));
+      s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit"));
+      s_cred = ImageIO.read(Menu.class.getResource(path + "s_cred"));
+    }
+    catch(IOException e)
+    {
+      System.out.println("Falha ao ler Menu");
+    }
+  }
   
   public Menu()
   {
@@ -134,5 +160,4 @@ public class Menu
     
     
   }
-  
 }

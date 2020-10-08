@@ -2,8 +2,10 @@ package com.lerthal.main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 public class MenuPause {
 
@@ -22,15 +24,34 @@ public class MenuPause {
     public static Option resumePause = new Option(92*4, 51*4, 58*4, 17*4); // poe as coordenas e o tamanho
     public static Option guidePause = new Option(99*4, 71*4, 46*4, 15*4); // poe as coordenas e o tamanho
     public static Option exitPause = new Option(102*4, 89*4, 38*4, 15*4); // Poe as coordenadas e o tamanho
-
-
+    
+    
+    public static BufferedImage menu_menu, b_resume, b_exit;
+    public static BufferedImage s_resume, s_exit;
+    
+    static{
+        
+        String path = "/menus/pause/";
+        
+        try
+        {
+            menu_menu = ImageIO.read(Menu.class.getResource(path + "menu"));
+            b_resume = ImageIO.read(Menu.class.getResource(path + "b_resume"));
+            b_exit = ImageIO.read(Menu.class.getResource(path + "b_exit"));
+            s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume"));
+            s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit"));
+        }
+        catch(IOException e)
+        {
+            System.out.println("Falha ao ler Menu");
+        }
+    }
+    
     public MenuPause(){
 
         mouseOptions.add(resumePause);
         mouseOptions.add(guidePause);
         mouseOptions.add(exitPause);
-
-
     }
 
     public void tick(){
