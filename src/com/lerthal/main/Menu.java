@@ -37,23 +37,24 @@ public class Menu
       s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume"));
       s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit"));
       s_cred = ImageIO.read(Menu.class.getResource(path + "s_cred"));
-      
-      opt_cred = new Option(101 * 4, 137 * 4, 38 * 4, 15 * 4, b_cred, s_cred);
-      opt_exit = new Option(121 * 4, 147 * 4, 38 * 4, 15 * 4, b_exit, s_exit);
-      opt_new = new Option(88 * 4, 119 * 4, 64 * 4, 15 * 4, b_new, s_new);
-      opt_resume = new Option(96 * 4, 100 * 4, 48 * 4, 15 * 4, b_resume, s_resume);
     }
     catch(IOException e)
     {
       System.out.println("Falha ao ler Menu");
+      System.exit(1);
     }
+  
+    opt_cred = new Option(101 * 4, 137 * 4, 38 * 4, 15 * 4, b_cred, s_cred);
+    opt_exit = new Option(121 * 4, 147 * 4, 38 * 4, 15 * 4, b_exit, s_exit);
+    opt_new = new Option(88 * 4, 119 * 4, 64 * 4, 15 * 4, b_new, s_new);
+    opt_resume = new Option(96 * 4, 100 * 4, 48 * 4, 15 * 4, b_resume, s_resume);
   }
   
   public void tick()
   {
     for(Option option : options)
     {
-      if(mouseX > option.x && mouseX < option.x + option.height && mouseY > option.y && mouseY < option.y + option.width)
+      if(mouseX > option.x && mouseX < option.x + option.width && mouseY > option.y && mouseY < option.y + option.height)
       {
         selected = option;
         break;
