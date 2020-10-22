@@ -1,5 +1,6 @@
 package com.lerthal.main;
 
+import com.lerthal.graficos.Dialogs;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -22,21 +23,24 @@ public class Menu
   public static Option opt_cred;
   public static Option selected;
   
+  // Ignora, eh so pra corrigir o lag
+  public static void init(){ MenuPause.init(); Dialogs.init(); }
+  
   static{
     
     String path = "/menus/iniciar/";
     
     try
     {
-      menu_menu = ImageIO.read(Menu.class.getResource(path + "menu"));
-      b_new = ImageIO.read(Menu.class.getResource(path + "b_new"));
-      b_resume = ImageIO.read(Menu.class.getResource(path + "b_resume"));
-      b_exit = ImageIO.read(Menu.class.getResource(path + "b_exit"));
-      b_cred = ImageIO.read(Menu.class.getResource(path + "b_cred"));
-      s_new = ImageIO.read(Menu.class.getResource(path + "s_new"));
-      s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume"));
-      s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit"));
-      s_cred = ImageIO.read(Menu.class.getResource(path + "s_cred"));
+      menu_menu = ImageIO.read(Menu.class.getResource(path + "menu.png"));
+      b_new = ImageIO.read(Menu.class.getResource(path + "b_new.png"));
+      b_resume = ImageIO.read(Menu.class.getResource(path + "b_resume.png"));
+      b_exit = ImageIO.read(Menu.class.getResource(path + "b_exit.png"));
+      b_cred = ImageIO.read(Menu.class.getResource(path + "b_cred.png"));
+      s_new = ImageIO.read(Menu.class.getResource(path + "s_new.png"));
+      s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume.png"));
+      s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit.png"));
+      s_cred = ImageIO.read(Menu.class.getResource(path + "s_cred.png"));
     }
     catch(IOException e)
     {

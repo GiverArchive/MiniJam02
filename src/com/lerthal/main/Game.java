@@ -78,6 +78,10 @@ public class Game extends Canvas implements Runnable
      * System.out.println("Jogo Salvo"); } });
      */
     // Inicializando Objetos :)
+    
+    // Corrigir lag na inicialização dos menus
+    Menu.init();
+    
     ui = new UI();
     image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     entities = new ArrayList<Entity>();
@@ -234,10 +238,10 @@ public class Game extends Canvas implements Runnable
       {
         g2.drawString("> Aperte M para sair do jogo! :) <", 240, 345);
       }
-    } else if(gameState == "Menu")
+    } else if(gameState.equals("Menu"))
     {
       menu.render(g);
-    } else if(gameState == "Pause")
+    } else if(gameState.equals("Pause"))
     {
       menuPause.render(g);
     }

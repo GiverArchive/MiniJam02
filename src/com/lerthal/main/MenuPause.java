@@ -20,17 +20,20 @@ public class MenuPause {
     public static BufferedImage menu_menu, b_resume, b_exit;
     public static BufferedImage s_resume, s_exit;
     
+    // Ignora, eh so pra corrigir o lag
+    public static void init() {}
+    
     static{
         
         String path = "/menus/pause/";
         
         try
         {
-            menu_menu = ImageIO.read(Menu.class.getResource(path + "menu"));
-            b_resume = ImageIO.read(Menu.class.getResource(path + "b_resume"));
-            b_exit = ImageIO.read(Menu.class.getResource(path + "b_exit"));
-            s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume"));
-            s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit"));
+            menu_menu = ImageIO.read(Menu.class.getResource(path + "menu.png"));
+            b_resume = ImageIO.read(Menu.class.getResource(path + "b_resume.png"));
+            b_exit = ImageIO.read(Menu.class.getResource(path + "b_exit.png"));
+            s_resume = ImageIO.read(Menu.class.getResource(path + "s_resume.png"));
+            s_exit = ImageIO.read(Menu.class.getResource(path + "s_exit.png"));
         }
         catch(IOException e)
         {
